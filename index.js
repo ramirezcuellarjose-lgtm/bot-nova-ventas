@@ -130,6 +130,7 @@ app.post('/webhook', async (req, res) => {
 
   try {
     const { event, data } = req.body;
+    console.log('DATA:', JSON.stringify(data));
 
     // Solo procesar mensajes entrantes
     if (event !== 'messages.upsert') return;
