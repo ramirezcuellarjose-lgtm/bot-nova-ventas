@@ -112,7 +112,7 @@ async function llamarGrok(historial) {
 // ─── Enviar mensaje por Evolution API ───────────────────────────────────────
 async function enviarMensaje(numero, texto) {
   await axios.post(`${EVOLUTION_URL}/message/sendText/${INSTANCE_NAME}`, {
-    number: remoteJid,
+    number: numero,
     options: { delay: 1500, presence: 'composing' },
     textMessage: { text: texto }
   }, {
