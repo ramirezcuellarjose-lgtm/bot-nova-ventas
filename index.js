@@ -92,7 +92,7 @@ function limpiarHistorialAntiguo(numero) {
 // ─── Llamar a Grok API ───────────────────────────────────────────────────────
 async function llamarGrok(historial) {
   const response = await axios.post('https://api.x.ai/v1/chat/completions', {
-    model: 'grok-3-mini',
+    model: process.env.GROK_MODEL || 'grok-4-1-fast-non-reasoning',
     max_tokens: 300,
     temperature: 0.7,
     messages: [
