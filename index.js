@@ -93,8 +93,7 @@ function limpiarHistorialAntiguo(numero) {
 async function llamarGrok(historial) {
   const response = await axios.post('https://api.x.ai/v1/chat/completions', {
     model: process.env.GROK_MODEL || 'grok-4-1-fast-non-reasoning',
-    max_tokens: 300,
-    temperature: 0.7,
+    max_tokens: 500,
     messages: [
       { role: 'system', content: SYSTEM_PROMPT },
       ...historial
@@ -167,7 +166,7 @@ app.post('/webhook', async (req, res) => {
     console.log(`[${new Date().toISOString()}] Respuesta enviada a ${numero}: ${respuesta.substring(0, 50)}`);
 
   } catch (error) {
-    console.error('Error procesando mensaje:', error.response?.data || error.message);
+    console.error('Error procesando mensaje:', JSON.stringify(error.response?.data) || error.message);
   }
 });
 
