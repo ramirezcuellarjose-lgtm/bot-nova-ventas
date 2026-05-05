@@ -94,6 +94,7 @@ async function llamarGrok(historial) {
   const response = await axios.post('https://api.x.ai/v1/chat/completions', {
     model: process.env.GROK_MODEL || 'grok-4-1-fast-non-reasoning',
     max_tokens: 500,
+    temperature: 0.7
     messages: [
       { role: 'system', content: SYSTEM_PROMPT },
       ...historial
@@ -111,7 +112,7 @@ async function llamarGrok(historial) {
 // ─── Enviar mensaje por Evolution API ───────────────────────────────────────
 async function enviarMensaje(numero, texto) {
   await axios.post(`${EVOLUTION_URL}/message/sendText/${INSTANCE_NAME}`, {
-    number: numero,
+    number: remoteJid,
     options: { delay: 1500, presence: 'composing' },
     textMessage: { text: texto }
   }, {
@@ -161,7 +162,7 @@ app.post('/webhook', async (req, res) => {
     historial.push({ role: 'assistant', content: respuesta });
 
     // Enviar respuesta al cliente
-    await enviarMensaje(numero, respuesta);
+    await enviarMensaje(remoteJid, respuesta);
 
     console.log(`[${new Date().toISOString()}] Respuesta enviada a ${numero}: ${respuesta.substring(0, 50)}`);
 
