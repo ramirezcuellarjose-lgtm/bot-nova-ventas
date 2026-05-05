@@ -94,7 +94,7 @@ async function llamarGrok(historial) {
   const response = await axios.post('https://api.x.ai/v1/chat/completions', {
     model: process.env.GROK_MODEL || 'grok-4-1-fast-non-reasoning',
     max_tokens: 500,
-    temperature: 0.7
+    temperature: 0.7,
     messages: [
       { role: 'system', content: SYSTEM_PROMPT },
       ...historial
