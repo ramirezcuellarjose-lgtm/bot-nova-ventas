@@ -146,7 +146,7 @@ app.post('/webhook', async (req, res) => {
     // Extraer número limpio
     const remoteJid = data.key?.remoteJid || '';
     if (remoteJid.endsWith('@g.us')) return; // Ignorar grupos
-    const numero = remoteJid.replace('@s.whatsapp.net', '');
+    const numero = remoteJid.split('@')[0];
 
     console.log(`[${new Date().toISOString()}] Mensaje de ${numero}: ${texto.substring(0, 50)}`);
 
