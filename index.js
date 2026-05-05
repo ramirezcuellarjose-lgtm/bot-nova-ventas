@@ -146,7 +146,9 @@ app.post('/webhook', async (req, res) => {
     // Extraer número limpio
     const remoteJid = data.key?.remoteJid || '';
     if (remoteJid.endsWith('@g.us')) return; // Ignorar grupos
-    const numero = remoteJid.split('@')[0];
+    const numero = data.key?.remoteJid?.includes('@lid') 
+      ? data.sender?.split('@')[0] 
+      : remoteJid.split('@')[0];
 
     console.log(`[${new Date().toISOString()}] Mensaje de ${numero}: ${texto.substring(0, 50)}`);
 
